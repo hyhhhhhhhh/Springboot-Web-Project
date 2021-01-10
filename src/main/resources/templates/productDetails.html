@@ -1,0 +1,276 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--====== Title ======-->
+    <title>HaFood</title>
+    <!--====== Bootstrap css ======-->
+<!--    <link rel="stylesheet" th:href="@{/static/css/bootstrap-v3.3.7.min.css}">-->
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}">
+
+    <!--====== Pe Icon 7 Stroke css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/Pe-icon-7-stroke.css}">
+
+    <!--====== Ion Icons css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/ionicons.min.css}">
+
+    <!--====== Magnific Popup css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/magnific-popup.css}">
+
+    <!--====== Slick css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/slick.css}">
+
+    <!--====== Animate css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/animate.min.css}">
+
+    <!--====== Nice Select css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/nice-select.css}">
+
+    <!--====== Default css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/default.css}">
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+
+
+</head>
+
+<body>
+
+    <!--====== PRELOADER  PART START ======-->
+
+    <div id="preloader">
+        <div id="loader">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!--====== PRELOADER  PART ENDS ======-->
+
+    <!--    注册下拉栏目-->
+    <div th:insert="~{common/common::state}"></div>
+
+
+    <!--====== SHOPPING CART PART START ======-->
+
+    <div th:insert="~{common/common::cart}"></div>
+
+    <!--====== SHOPPING CART PART ENDS ======-->
+
+
+    <!--====== HEADER  PART START ======-->
+
+    <header th:insert="~{common/common::topbar}"></header>
+
+    <!--====== HEADER  PART ENDS ======-->
+
+    <!--====== PAGE TITLE  PART START ======-->
+
+    <section class="page-title-area d-flex align-items-center bg_cover" style="background-image: url(/static/images/page-title-bg.jpg)">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-title-item text-center">
+                        <h3 class="title">Product Details</h3>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+                            </ol>
+                        </nav>
+                    </div> <!-- page title item -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- row -->
+        <div class="page-title-shape">
+            <img src="/static/images/banner-shape.png" alt="shape">
+        </div> <!-- page title shape -->
+    </section>
+
+    <!--====== PAGE TITLE  PART ENDS ======-->
+
+    <!--====== PRODUCT DETAILS PART START ======-->
+
+    <section class="product-details-area pt-30 pb-90">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-5">
+                    <div class="product-details-thumb mt-35">
+                        <img src="/static/images/product-details-thumb-1.jpg" alt="product details">
+
+                    </div>
+
+                </div>
+                <div class="col-lg-6 col-md-7" th:with="AtrriMap=${AtrriMap}">
+                    <div class="product-details-content mt-30">
+                        <div class="product-details-title">
+                            <p style="font-size: x-large;font-weight: bolder;color: black;padding: 20px 0px  20px" th:text="${AtrriMap['ProductName']}"></p>
+                        </div>
+                        <div class="product-details-review d-flex">
+                            <ul>
+                                <li><i class="ion ion-md-star"></i></li>
+                                <li><i class="ion ion-md-star"></i></li>
+                                <li><i class="ion ion-md-star"></i></li>
+                                <li><i class="ion ion-md-star"></i></li>
+                                <li><i class="ion ion-md-star"></i></li>
+                            </ul>
+
+                        </div>
+                        <div class="product-details-con" th:with="DPrice=${AtrriMap['Price']*AtrriMap['Discount']}">
+                            <span th:text="${AtrriMap['Discount']}<1 and ${AtrriMap['Discount']}>0?'￥'+${#numbers.formatDecimal(DPrice,0,'COMMA',2,'POINT')}:'￥'+${AtrriMap['Price']}"></span>
+                            <span class="item-2" style="text-decoration:line-through;padding-left: 20px;color: grey;font-size: medium"
+                                  th:text="${AtrriMap['Discount']}<1 and ${AtrriMap['Discount']}>0?'￥'+${AtrriMap['Price']}:''"
+                            >$60</span>
+                            <p th:text="${Description['brief']}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                        </div>
+
+                        <div style="padding-top: 10px " class="product-details-weight d-flex align-items-center">
+                            <span>销量</span>
+                            <p th:text="${AtrriMap['Sales']}">20</p>
+                        </div>
+
+                        <div style="padding-top: 10px " class="product-details-weight d-flex align-items-center">
+                            <span>库存</span>
+                            <p th:text="${AtrriMap['Quantity']}">20</p>
+                        </div>
+
+                        <div style="padding-top: 10px " class="product-details-weight d-flex align-items-center">
+                            <span>浏览次数</span>
+                            <p th:text="${AtrriMap['ViewTimes']}+1">20</p>
+                        </div>
+                        <form th:action="@{/AddToCart/}+${AtrriMap['id']}" method="post">
+                        <div class="product-details-cart d-flex align-items-center">
+
+                            <div class="product-quantity" id="quantity">
+                                <button type="button" id="sub" class="sub">-</button>
+                                <input name="Q" type="text" id="1" value="1" />
+                                <button type="button" id="add" class="add">+</button>
+                            </div>
+                            <div class="add-cart">
+                                <button class="btn btn-outline-warning" type="submit">Add to cart </button>
+                            </div>
+
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--====== PRODUCT DETAILS PART ENDS ======-->
+
+
+    <!--====== BLOG REVIEWS PART START ======-->
+
+    <div class="blog-reviews-area gray-bg pt-85 pb-90">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="blog-tab">
+                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Descriptions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Reviews</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="blog-reviews-thumb">
+                                <img src="/static/images/blog-review-thumb.jpg" alt="review">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="blog-reviews-content">
+                                <p th:text="${Description['detail']}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-12 col-md-12">
+                            <div class="blog-reviews-content">
+                               <p>敬请期待</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--====== BLOG REVIEWS PART ENDS ======-->
+
+
+
+    <!--====== FOOTER PART START ======-->
+
+    <div th:insert="~{common/common::CompanyFooter}"></div>
+
+    <!--====== FOOTER PART ENDS ======-->
+
+    <!--====== BACK TO TOP ======-->
+    <div class="back-to-top">
+        <a href="">
+            <i class="ion ion-md-arrow-up"></i>
+        </a>
+    </div>
+    <!--====== BACK TO TOP ======-->
+
+
+
+
+
+
+
+
+    <!--====== jquery js ======-->
+    <script src="/static/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="/static/js/vendor/jquery-1.12.4.min.js"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+
+    <!--====== Slick js ======-->
+    <script src="/static/js/slick.min.js"></script>
+
+    <!--====== Isotope js ======-->
+    <script src="/static/js/isotope.pkgd.min.js"></script>
+
+    <!--====== Images Loaded js ======-->
+    <script src="/static/js/imagesloaded.pkgd.min.js"></script>
+
+    <!--====== Magnific Popup js ======-->
+    <script src="/static/js/jquery.magnific-popup.min.js"></script>
+
+    <!--====== Nice Select js ======-->
+    <script src="/static/js/jquery.nice-select.min.js"></script>
+
+    <!--====== Ajax Contact js ======-->
+    <!--    <script src="/js/ajax-contact.js"></script>-->
+
+    <!--====== Main js ======-->
+    <script src="/static/js/main.js"></script>
+
+</body>
+
+</html>
+

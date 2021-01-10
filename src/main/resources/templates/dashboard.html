@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--    HighCharts-->
+    <link rel="stylesheet" th:href="@{/static/css/charts.css}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/static/dashboard/vendor/bootstrap/css/bootstrap.min.css}">
+    <link th:href="@{/static/dashboard/vendor/fonts/circular-std/style.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/static/dashboard/libs/css/style.css}">
+    <link rel="stylesheet" th:href="@{/static/dashboard/vendor/fonts/fontawesome/css/fontawesome-all.css}">
+    <link rel="stylesheet" th:href="@{/static/dashboard/vendor/vector-map/jqvmap.css}">
+    <link rel="stylesheet" th:href="@{/static/dashboard/vendor/jvectormap/jquery-jvectormap-2.0.2.css}">
+    <link rel="stylesheet" th:href="@{/static/dashboard/vendor/fonts/flag-icon-css/flag-icon.min.css}">
+    <title></title>
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <div th:insert="~{common/common::admintopbar}"></div>
+        <!-- ============================================================== -->
+        <!-- left sidebar -->
+        <!-- ============================================================== -->
+        <div th:insert="~{common/common::adminsidebar}"></div>
+        <!-- ============================================================== -->
+        <!-- end left sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- wrapper  -->
+        <!-- ============================================================== -->
+        <div class="dashboard-wrapper">
+
+            <div class="modal fade" id="Add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form action="/SubmitAdd" method="post" th:object="${commodity}">
+                                <div class="form-group">
+                                    <label >ID</label>
+                                    <input type="hidden" class="form-control" th:field="*{id}"  readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label >ProductName</label>
+                                    <input type="text" class="form-control" th:field="*{productName}"  >
+                                </div>
+                                <div class="form-group">
+                                    <label >Quantity</label>
+                                    <input type="number" class="form-control" th:field="*{quantity}"  >
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label >Price</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" th:field="*{price}" >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">RMB</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label >Sales</label>
+                                    <input type="hidden"  class="form-control" th:field="*{sales}" >
+                                </div>
+                                <div class="form-group">
+                                    <label >ViewTimes</label>
+                                    <input type="hidden" class="form-control" th:field="*{viewTimes}" >
+                                </div>
+                                <div class="form-group">
+                                    <label >Discount</label>
+                                    <input type="text" class="form-control" th:field="*{discount}" >
+                                </div>
+                                <div class="form-group">
+                                    <label >Date</label>
+                                    <input type="hidden" class="form-control" th:field="*{date}" >
+                                </div>
+
+                                <!--                                <div class="form-group">-->
+                                <!--                                    <label for="exampleInputFile">File input</label>-->
+                                <!--                                    <input type="file" id="exampleInputFile">-->
+                                <!--                                    <p class="help-block">Example block-level help text here.</p>-->
+                                <!--                                </div>-->
+
+                                <button style="float: right" type="submit" class="btn btn-default" value="Submit">Submit</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer ">
+                            <button style="float: left" type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <!-- ============================================================== -->
+                    <!-- pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">E-commerce Dashboard Template </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard Template</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="ecommerce-widget">
+
+                        <div class="row">
+                            <!-- ============================================================== -->
+                      
+                            <!-- ============================================================== -->
+
+                                          <!-- recent orders  -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">全部商品</h5>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0">#</th>
+                                                        <th class="border-0">Image</th>
+                                                        <th class="border-0">商品名字</th>
+                                                        <th class="border-0">商品Id</th>
+                                                        <th class="border-0">库存</th>
+                                                        <th class="border-0">价格￥</th>
+                                                        <th class="border-0">销量</th>
+                                                        <th class="border-0">折扣</th>
+                                                        <th class="border-0">浏览次数</th>
+                                                        <th class="border-0">上次进货时间</th>
+                                                        <th class="border-0">
+                                                            操作
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="entries,stat:${data}" >
+                                                        <td th:text="${stat.count}"></td>
+                                                        <td th:text="${entries['id']}"></td>
+                                                        <td th:text="${entries['ProductName']}"></td>
+                                                        <td th:text="${entries['id']}"></td>
+                                                        <td th:text="${entries['Quantity']}"></td>
+                                                        <td th:text="${entries['Price']}"></td>
+                                                        <td th:text="${entries['Sales']}"></td>
+                                                        <td th:text="${entries['Discount']}"></td>
+                                                        <td th:text="${entries['ViewTimes']}"></td>
+                                                        <td th:text="${entries['Date']}"></td>
+                                                        <td>
+<!--                                                            在data-target里面加入参数 传递id-->
+                                                            <a th:href="@{/dashboard/modify/}+${entries['id']}"><button type="button" class="btn btn-primary btn-sm"  >
+                                                               修改
+                                                            </button></a>
+                                                            <a th:href="@{/dashboard/del/}+${entries['id']}"> <button type="button" class="btn btn-danger btn-sm" >
+                                                               删除
+                                                            </button></a>
+                                                            <a th:href="@{/dashboard/addDetail/}+${entries['id']}"> <button type="button" class="btn btn-info btn-sm" >
+                                                                详情
+                                                            </button></a>
+
+                                                        </td>
+
+
+
+                                                    </tr>
+<!--                                                    <tr>-->
+<!--                                                        <td>1</td>-->
+<!--                                                        <td>-->
+<!--                                                            <div class="m-r-10"><img src="dashboard/images/product-pic.jpg" alt="user" class="rounded" width="45"></div>-->
+<!--                                                        </td>-->
+<!--                                                        <td>Product #1 </td>-->
+<!--                                                        <td>id000001 </td>-->
+<!--                                                        <td>20</td>-->
+<!--                                                        <td>$80.00</td>-->
+<!--                                                        <td>27-08-2018 01:22:12</td>-->
+<!--                                                        <td>Patricia J. King </td>-->
+<!--                                                        <td><span class="badge-dot badge-brand mr-1"></span>InTransit </td>-->
+<!--                                                        <td>-->
+<!--                                                            <span><a href="#" calss="btn ">修改</a></span>-->
+<!--                                                            <span><a href="#" calss="btn ">删除</a></span>-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
+
+                                                    <tr>
+                                                        <td colspan="11"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Add">
+                                                            添加
+                                                        </button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- end recent orders  -->
+
+    
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+
+                            <!-- ============================================================== -->
+                        </div>
+                        <div class="row">
+
+                            <!-- ============================================================== -->
+
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <div id="container1"></div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <div id="container2"></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <div class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                             Copyright &copy; 2020.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript: void(0);">About</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- end wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <!--<script src="/static/js/test.js"></script>-->
+    <script th:inline="javascript">
+        var xaxis = [[${xaxis}]]
+        var yaxis_view = [[${yaxis_view}]]
+        var yaxis_Q =[[${yaxis_Q}]]
+        var xaxis2 = [[${xaxis2}]]
+        var yaxis_sales = [[${yaxis_sales2}]]
+        var yaxis_rest = [[${yaxis_rest2}]]
+        var json1 =  {
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: '销售统计报表',
+                align: 'left'
+            },
+            subtitle: {
+                text: '浏览/销售',
+                align: 'left'
+            },
+            xAxis: [{
+                categories: xaxis,
+                crosshair: true
+            }],
+            yAxis: [
+                // Primary yAxis
+                {
+                    labels: {
+                        format: '{value}件',
+                        style: {
+                            color: Highcharts.getOptions().colors[2]
+                        }
+                    },
+                    title: {
+                        text: '销售额',
+                        style: {
+                            color: Highcharts.getOptions().colors[2]
+                        }
+                    },
+                    opposite: true
+
+                },
+                // Secondary yAxis
+                {
+                    gridLineWidth: 0,
+                    title: {
+                        text: '浏览量',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    labels: {
+                        format: '{value}次',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    }
+
+                }
+            ],
+            tooltip:
+                {
+                    shared: true
+                },
+            legend:
+                {
+                    layout: 'vertical',
+                    align: 'left',
+                    x: 80,
+                    verticalAlign: 'top',
+                    y: 55,
+                    floating: true,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || // theme
+                        'rgba(255,255,255,0.25)'
+                },
+            series: [
+                {
+                    name: '浏览量',
+                    type: 'column',
+                    yAxis: 1,
+                    data: yaxis_view,
+                    tooltip: {
+                        valueSuffix: ' 次'
+                    }
+
+                },
+                {
+
+                    name: '销售额',
+                    type: 'spline',
+                    data: yaxis_Q,
+                    color: '#a8ec7d',
+                    tooltip: {
+                        valueSuffix: ' 件'
+                    }
+                }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            floating: false,
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom',
+                            x: 0,
+                            y: 0
+                        },
+                        yAxis: [{
+                            labels: {
+                                align: 'right',
+                                x: 0,
+                                y: -6
+                            },
+                            showLastLabel: false
+                        }, {
+                            labels: {
+                                align: 'left',
+                                x: 0,
+                                y: -6
+                            },
+                            showLastLabel: false
+                        }, {
+                            visible: false
+                        }]
+                    }
+                }]
+            }
+        };
+
+        Highcharts.chart('container1',
+            json1);
+
+        var json2 ;
+        Highcharts.chart('container2', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '商品销售额'
+            },
+            xAxis: {
+                categories: xaxis2,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '库存/销量'
+                }
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent'
+                }
+            },
+            series: [ {
+                name: '库存',
+                data: yaxis_rest
+            },{
+                name: '销售额',
+                data: yaxis_sales,
+                color: '#434348'
+            },
+            ]
+        });
+
+    </script>
+    <!-- ============================================================== -->
+    <!-- end main wrapper  -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <!-- jquery 3.3.1 -->
+    <script  th:src="@{/static/dashboard/vendor/jquery/jquery-3.3.1.min.js}"></script>
+    <!-- bootstap bundle js -->
+    <script th:src="@{/static/dashboard/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
+    <!-- slimscroll js -->
+    <script th:src="@{/static/dashboard/vendor/slimscroll/jquery.slimscroll.js}"></script>
+    <!-- main js -->
+    <script th:src="@{/static/dashboard/libs/js/main-js.js}"></script>
+    <!-- chart chartist js -->
+    <script th:src="@{/static/dashboard/vendor/charts/chartist-bundle/chartist.min.js}"></script>
+    <!-- sparkline js -->
+    <script th:src="@{/static/dashboard/vendor/charts/sparkline/jquery.sparkline.js}"></script>
+    <!-- morris js -->
+    <script th:src="@{/static/dashboard/vendor/charts/morris-bundle/raphael.min.js}"></script>
+    <script th:src="@{/static/dashboard/vendor/charts/morris-bundle/morris.js}"></script>
+    <!-- chart c3 js -->
+    <script th:src="@{/static/dashboard/vendor/charts/c3charts/c3.min.js}"></script>
+    <script th:src="@{/static/dashboard/vendor/charts/c3charts/d3-5.4.0.min.js}"></script>
+    <script th:src="@{/static/dashboard/vendor/charts/c3charts/C3chartjs.js}"></script>
+    <script th:src="@{/static/dashboard/libs/js/dashboard-ecommerce.js}"></script>
+</body>
+ 
+</html>
+

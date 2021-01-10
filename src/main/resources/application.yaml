@@ -1,0 +1,42 @@
+
+# 普通QQ邮箱
+
+server:
+  port: 2
+
+mail:
+  fromMail:
+    addr: 1173214092@qq.com # 发邮件者
+
+
+
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 1173214092@qq.com
+    password: lauzjsqqoguwjggf
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/eplatform?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+#    username: eplatform
+    password: root
+#    type: com.alibaba.druid.pool.DruidDataSource
+
+#
+#  thymeleaf:
+#    cache: false
+  #
+  ## Set root logger level to DEBUG and its only appender to A1.
+  #log4j.rootLogger=DEBUG, A1
+  #
+  ## A1 is set to be a ConsoleAppender.
+  #log4j.appender.A1=org.apache.log4j.ConsoleAppender
+  #
+  ## A1 uses PatternLayout.
+  #log4j.appender.A1.layout=org.apache.log4j.PatternLayout
+  #log4j.appender.A1.layout.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n
+
+  #自定义配置日期格式
+#  mvc:
+#    date-format:

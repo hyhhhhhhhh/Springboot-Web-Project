@@ -1,0 +1,255 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--====== Title ======-->
+    <title>Home</title>
+
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap-v3.3.7.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}">
+
+    <!--====== Pe Icon 7 Stroke css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/Pe-icon-7-stroke.css}">
+
+    <!--====== Ion Icons css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/ionicons.min.css}">
+
+    <!--====== Magnific Popup css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/magnific-popup.css}">
+
+    <!--====== Slick css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/slick.css}">
+
+    <!--====== Animate css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/animate.min.css}">
+
+    <!--====== Nice Select css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/nice-select.css}">
+
+    <!--====== Default css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/default.css}">
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+
+
+</head>
+
+<body>
+
+    <!--====== PRELOADER  PART START ======-->
+
+    <div id="preloader">
+        <div id="loader">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!--====== PRELOADER  PART ENDS ======-->
+
+    <!--    注册下拉栏目-->
+    <div th:insert="~{common/common::state}"></div>
+
+
+    <!--====== SHOPPING CART PART START ======-->
+
+    <div th:insert="~{common/common::cart}"></div>
+
+    <!--====== SHOPPING CART PART ENDS ======-->
+
+    <!--====== HEADER  PART START ======-->
+
+    <header th:insert="~{common/common::topbar}"></header>
+
+    <!--====== HEADER  PART ENDS ======-->
+
+    <!--====== BANNER  PART START ======-->
+
+    <div class="banner-active">
+        <div class="banner-area d-flex align-items-center bg_cover" th:style="'background:url(' + @{/static/images/banner-bg.jpg} + ');'" >
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="banner-content text-center">
+                            <h1 data-animation="fadeInUp" data-delay="0.5s" class="title">Welcome</h1>
+                            <a data-animation="fadeInUp" data-delay="1.2s" class="main-btn" >SHOP Now</a>
+                        </div>
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+            <div class="banner-shape">
+                <img th:src="@{/static/images/banner-shape.png}" alt="shape">
+            </div>
+        </div> <!-- banner area -->
+        <div class="banner-area d-flex align-items-center bg_cover" th:style="'background:url(' + @{/static/images/banner-bg-2.jpg} + ');'" >
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="banner-content text-center">
+                            <h1 data-animation="fadeInUp" data-delay="0.5s" class="title">Welcome</h1>
+                            <a data-animation="fadeInUp" data-delay="1.2s" class="main-btn" >SHOP Now</a>
+                        </div>
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+            <div class="banner-shape">
+                <img th:src="@{/static/images/banner-shape.png}" alt="shape">
+            </div>
+        </div> <!-- banner area -->
+        <div class="banner-area d-flex align-items-center bg_cover" th:style="'background:url(' + @{/static/images/banner-bg-3.jpg} + ');'" >
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="banner-content text-center">
+                            <h1 data-animation="fadeInUp" data-delay="0.5s" class="title">Welcome</h1>
+                            <a data-animation="fadeInUp" data-delay="1.2s" class="main-btn" >SHOP Now</a>
+                        </div>
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+            <div class="banner-shape">
+                <img th:src="@{/static/images/banner-shape.png}" alt="shape">
+            </div>
+        </div> <!-- banner area -->
+    </div>
+
+    <!--====== BANNER  PART ENDS ======-->
+
+    <div>
+        <div class="search-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <!--                    //如果未登录则显示-->
+
+                        <div class="search-form col-lg-12 ">
+                            <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+                            <div class="col-lg-12">
+                                <form th:action="@{/search}" method="post">
+                                <div class="col-lg-8">
+                                    <input name="productName" type="text" placeholder="search for product">
+
+                                    <button type="submit">Search</button>
+                                </div>
+
+
+
+
+
+                            </form>
+
+                        </div>
+
+                        <!--                    //如果已登录则可以注销或者登录其他-->
+
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- search body -->
+    </div>
+
+    <!--====== PRODUCT  PART START ======-->
+
+    <section class="product-area area-padding">
+        <div class="container">
+            <div class="row">
+<!--                <div class="col-lg-4 col-md-4 col-sm-6">-->
+<!--                    <div class="single-product mt-30">-->
+<!--                        <img th:src="@{/static/images/product-1.jpg}" alt="product">-->
+<!--                        <a href="productDetails.html">-->
+<!--                            <h6 class="title">Grape</h6>-->
+<!--                        </a>-->
+<!--                        <ul>-->
+<!--                            <li>$15.00</li>-->
+<!--                        </ul>-->
+<!--                    </div> &lt;!&ndash; single product &ndash;&gt;-->
+<!--                </div>-->
+                <div class="col-lg-4 col-md-4 col-sm-6" th:each="entries,stat:${data}">
+                    <div class="single-product mt-30">
+                        <a th:href="@{/productDetails/}+${entries['id']}">
+                        <img th:src="@{/static/images/product-1.jpg}" alt="product">
+
+
+                        <div style="margin-top: 20px;margin-bottom: 10px">
+                                <p style="font-size: large;font-weight: bolder;color: black" th:text="${entries['ProductName']}"></p>
+                        </div>
+                        </a>
+                        <ul th:with="DPrice=${entries['Price']*entries['Discount']}">
+                            <li th:text="${entries['Discount']}<1 and ${entries['Discount']}>0?'￥'+${#numbers.formatDecimal(DPrice,0,'COMMA',2,'POINT') }:'￥'+${entries['Price']}"></li>
+                            <li class="item-2" th:text="${entries['Discount']}<1 and ${entries['Discount']}>0?'￥'+${entries['Price']}:''"></li>
+                            <li th:text="'销量：'+${entries['Sales']}"></li>
+                        </ul>
+                        <ul>
+                            <li th:text="'库存：'+${entries['Quantity']}"></li>
+                            <li th:text="'浏览次数：'+${entries['ViewTimes']}"></li>
+<!--                            <li>折扣</li>-->
+                        </ul>
+                    </div> <!-- single product -->
+                </div>
+
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== PRODUCT  PART ENDS ======-->
+
+
+
+    <!--====== FOOTER PART START ======-->
+
+    <div th:insert="~{common/common::CompanyFooter}"></div>
+
+    <!--====== FOOTER PART ENDS ======-->
+
+    <!--====== BACK TO TOP ======-->
+    <div class="back-to-top">
+        <a href="">
+            <i class="ion ion-md-arrow-up"></i>
+        </a>
+    </div>
+    <!--====== BACK TO TOP ======-->
+
+
+
+    <!--====== jquery js ======-->
+    <script src="/static/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="/static/js/vendor/jquery-1.12.4.min.js"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+
+    <!--====== Slick js ======-->
+    <script src="/static/js/slick.min.js"></script>
+
+    <!--====== Isotope js ======-->
+    <script src="/static/js/isotope.pkgd.min.js"></script>
+
+    <!--====== Images Loaded js ======-->
+    <script src="/static/js/imagesloaded.pkgd.min.js"></script>
+
+    <!--====== Magnific Popup js ======-->
+    <script src="/static/js/jquery.magnific-popup.min.js"></script>
+
+    <!--====== Nice Select js ======-->
+    <script src="/static/js/jquery.nice-select.min.js"></script>
+
+    <!--====== Ajax Contact js ======-->
+    <!--    <script src="/js/ajax-contact.js"></script>-->
+
+    <!--====== Main js ======-->
+    <script src="/static/js/main.js"></script>
+
+</body>
+
+</html>
+

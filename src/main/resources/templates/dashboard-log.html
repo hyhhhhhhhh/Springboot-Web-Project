@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/static/dashboard/vendor/bootstrap/css/bootstrap.min.css}">
+    <link th:href="@{/static/dashboard/vendor/fonts/circular-std/style.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/static/dashboard/libs/css/style.css}">
+    <link rel="stylesheet" th:href="@{/static/dashboard/vendor/fonts/fontawesome/css/fontawesome-all.css}">
+    <link rel="stylesheet" th:href="@{/static/dashboard/vendor/vector-map/jqvmap.css}">
+    <link rel="stylesheet" th:href="@{/static/dashboard/vendor/jvectormap/jquery-jvectormap-2.0.2.css}">
+    <link rel="stylesheet" th:href="@{/static/dashboard/vendor/fonts/flag-icon-css/flag-icon.min.css}">
+    <title></title>
+</head>
+
+    <body>
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <!-- ============================================================== -->
+        <!-- navbar -->
+        <!-- ============================================================== -->
+        <div th:insert="~{common/common::admintopbar}"></div>
+        <!-- ============================================================== -->
+        <!-- left sidebar -->
+        <!-- ============================================================== -->
+        <div th:insert="~{common/common::adminsidebar}"></div>
+        <!-- ============================================================== -->
+        <!-- end left sidebar -->
+        <!-- ============================================================== -->
+
+
+        <!-- ============================================================== -->
+        <!-- wrapper  -->
+        <!-- ============================================================== -->
+        <div class="dashboard-wrapper">
+            <div class="container-fluid  dashboard-content">
+                <!-- ============================================================== -->
+                <!-- pagehader  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h3 class="mb-2">Sales Dashboard Template </h3>
+                            <p class="pageheader-text">Lorem ipsum dolor sit ametllam fermentum ipsum eu porta consectetur adipiscing elit.Nullam vehicula nulla ut egestas rhoncus.</p>
+                            <div class="page-breadcrumb">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Sales Dashboard Template</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- pagehader  -->
+
+                <div class="row">
+                    <!-- ============================================================== -->
+                    <!-- top selling products  -->
+                    <!-- ============================================================== -->
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <h5 class="card-header">Log</h5>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="bg-light">
+                                            <tr class="border-0">
+                                                <th class="border-0">#</th>
+                                                <th class="border-0">图片</th>
+                                                <th class="border-0">商品</th>
+                                                <th class="border-0">商品Id</th>
+                                                <th class="border-0">操作</th>
+                                                <th class="border-0">数目</th>
+                                                <th class="border-0">时间</th>
+                                                <th class="border-0">顾客</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="log,index:${session.logData}">
+                                                <td th:text="index">1</td>
+                                                <td>
+                                                    <div class="m-r-10"><img src="/static/dashboard/images/product-pic.jpg" alt="user" class="rounded" width="45"></div>
+                                                </td>
+                                                <td th:text="${log['ProductName']}">Product #1 </td>
+                                                <td th:text="${log['ProductID']}">id000001 </td>
+                                                <td th:text="${log['interaction']==0}?'浏览':'购买'">20</td>
+                                                <td th:text="${log['Quantity']}?${log['Quantity']}:'/'">$80.00</td>
+                                                <td th:text="${log['time']}">27-08-2018 01:22:12</td>
+                                                <td th:text="${log['username']}">Patricia J. King </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end top selling products  -->
+
+                    <!-- ============================================================== -->
+                </div>
+
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <div class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            Copyright &copy; 2020.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript: void(0);">About</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- end wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper  -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <!-- jquery 3.3.1 js-->
+    <script  th:src="@{/static/dashboard/vendor/jquery/jquery-3.3.1.min.js}"></script>
+    <!-- bootstap bundle js -->
+    <script th:src="@{/static/dashboard/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
+    <!-- slimscroll js -->
+    <script th:src="@{/static/dashboard/vendor/slimscroll/jquery.slimscroll.js}"></script>
+    <!-- main js -->
+    <script th:src="@{/static/dashboard/libs/js/main-js.js}"></script>
+    <!-- chart chartist js -->
+    <script th:src="@{/static/dashboard/vendor/charts/chartist-bundle/chartist.min.js}"></script>
+    <!-- sparkline js -->
+    <script th:src="@{/static/dashboard/vendor/charts/sparkline/jquery.sparkline.js}"></script>
+    <!-- morris js -->
+    <script th:src="@{/static/dashboard/vendor/charts/morris-bundle/raphael.min.js}"></script>
+    <script th:src="@{/static/dashboard/vendor/charts/morris-bundle/morris.js}"></script>
+    <!-- chart c3 js -->
+    <script th:src="@{/static/dashboard/vendor/charts/c3charts/c3.min.js}"></script>
+    <script th:src="@{/static/dashboard/vendor/charts/c3charts/d3-5.4.0.min.js}"></script>
+    <script th:src="@{/static/dashboard/vendor/charts/c3charts/C3chartjs.js}"></script>
+    <script th:src="@{/static/dashboard/libs/js/dashboard-ecommerce.js}"></script>
+</body>
+
+</html>
